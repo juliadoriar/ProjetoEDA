@@ -11,16 +11,24 @@
 
 
 typedef struct {
-	char nome[20];
+	int id;
+	char nome[50];
 	int nif;
 	char morada[100];
 	float saldo; //montante disponível para cada cliente
-
-}cliente;
+	struct Cliente* proximo;
+}Cliente; 
 
 typedef struct {
-	char tipo[10];
+	int id;
+	char tipo[20];
 	float carga; // carga de energia disponivel 
+	float autonomia;
 	float custo;
+	char localizacao[40];
+}MeioMob; 
 
-}meioMob;
+typedef struct {
+	int id;
+	char nome[50];
+}Gestor;

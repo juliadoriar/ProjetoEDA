@@ -127,12 +127,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="FunctionsStorage.h" />
-    <ClInclude Include="StructsRegistos.h" />
+    <ClInclude Include="Functions.h" />
+    <ClInclude Include="Structs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.c" />
-    <ClCompile Include="FunctionsStorage.c" />
+    <ClCompile Include="Functions.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Clientes.txt" />
+    <Text Include="MeiosMob.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
