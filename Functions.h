@@ -1,7 +1,6 @@
 /*****************************************************************//**
  * \file   Functions.h
- * \brief  Funções para autenticação de cada utilizador, armazenamento
- * de dados de clientes, dos gestores e dos meios de mobilidade.
+ * \brief  Assinatura para todas as funções do programa.
  * 
  * \author julia
  * \date   March 2023
@@ -16,25 +15,25 @@
 
 /*bool existeCliente(Cliente* clientes[], int aux, int n);*/
 
-Cliente* criarCliente(Cliente* inicio, int id, char *nome[], int nif, char morada[], float saldo);
+//Função para criar novo cliente
+Cliente* criarCliente(Cliente* inicio, int id, char nome[], int nif, char morada[], float saldo);
 
+//Função para criar novo meio de mobilidadade
 MeioMob* criarMeio(MeioMob* inicio, int id, char tipo[], float carga, float autonomia, char localizacao[]);
 
+//Função para criar um novo gestor com id e nome
 Gestor* criarGestor(Gestor* inicio, int id, char nome[]);
 
+//Função para ler ficheiro Clientes.txt
+Cliente* lerFicheiro(Cliente*);
+
+void guardarCliente(Cliente* inicio);
+
+Cliente* inserirCliente(Cliente* listaClientes, int id, char nome[], int nif, char morada[], float saldo);
 
 
+/*
 
-/*int guardarCliente(Cliente* inicio);
-
-
-
-
-
-
-
-int guardarCliente(Cliente* inicio);
-int inserirCliente();
 int inserirMeio();
 int removeCliente();
 int removeMeio();*/

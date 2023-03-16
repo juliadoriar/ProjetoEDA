@@ -1,7 +1,6 @@
 /*****************************************************************//**
  * \file   FunctionsStorage.c
- * \brief  funções para autenticação de cada utilizador, armazenamento
- * de dados de clientes, dos gestores e dos meios de mobilidade.
+ * \brief  Implementação das funções recursivas e diretivas a serem usadas no main.c
  * 
  * \author julia
  * \date   March 2023
@@ -13,12 +12,22 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-
-
+//Funções para criar Clientes, Meios e Gestores e alocar na memória
+/**
+ * .
+ * 
+ * \param inicio
+ * \param id
+ * \param nome
+ * \param nif
+ * \param morada
+ * \param saldo
+ * \return 
+ */
 Cliente* criarCliente(Cliente * inicio, int id, char nome[], int nif, char morada[], float saldo)
 {
-	Cliente * c = malloc(sizeof(Cliente));
-	if (c != NULL)
+	Cliente * c = malloc(sizeof(Cliente)); 
+	if (c != NULL) 
 	{
 		c->id = id;
 		strcpy(c->nome, nome);
@@ -31,7 +40,17 @@ Cliente* criarCliente(Cliente * inicio, int id, char nome[], int nif, char morad
 	else return(inicio);
 }
 
-
+/**
+ * .
+ * 
+ * \param inicio
+ * \param id
+ * \param tipo
+ * \param carga
+ * \param autonomia
+ * \param localizacao
+ * \return 
+ */
 MeioMob* criarMeio(MeioMob* inicio, int id, char tipo[], float carga, float autonomia, char localizacao[])
 {
 	MeioMob* m = malloc(sizeof(MeioMob));
@@ -45,9 +64,16 @@ MeioMob* criarMeio(MeioMob* inicio, int id, char tipo[], float carga, float auto
 		
 		return m;
 	}
-	else return(inicio);
+	else return(inicio); 
 }
-
+/**
+ * .
+ * 
+ * \param inicio
+ * \param id
+ * \param nome
+ * \return 
+ */
 Gestor* criarGestor(Gestor* inicio, int id, char nome[])
 {
 	Gestor* g = malloc(sizeof(Gestor));
@@ -62,9 +88,8 @@ Gestor* criarGestor(Gestor* inicio, int id, char nome[])
 }
 
 
-
-
-/*int guardarCliente(Cliente* inicio)
+//Funções para guardar em ficheiros de texto os Clientes e Meios criados nas funções anteriores
+void guardarCliente(Cliente* inicio)
 {
 	FILE* fp;
 	fp = fopen("Clientes.txt", "w");
@@ -80,4 +105,65 @@ Gestor* criarGestor(Gestor* inicio, int id, char nome[])
 		return(1);
 	}
 	else return(0);
-}*/
+}
+
+Cliente* inserirCliente(Cliente* listaClientes, int id, char nome, int nif, char morada, float saldo)
+{
+	Cliente* novoCliente = malloc(sizeof(Cliente));
+
+	if (novoCliente != NULL)
+	{
+		novoCliente->id = id;
+		strcpy(novoCliente->nome, nome);
+		novoCliente->nif = nif;
+		strcpy(novoCliente->morada, morada);
+		novoCliente->saldo = saldo;
+		novoCliente->proximo = listaClientes;
+
+
+
+		return novoCliente;
+	}
+	else return(0);
+
+}
+
+
+/**
+ * .
+ * 
+ * \param c
+ * \return 
+ */
+ 
+ /*
+Cliente* lerFicheiro(Cliente* c)
+{
+	FILE* fp = fopen("Clientes.txt", "r");
+
+	if (fp == NULL)
+	{
+		exit(1);
+	}
+	Cliente* listaClientes= (Cliente*)malloc(sizeof(Cliente));
+
+	while (!feof(fp))
+	{
+		fscanf(fp, "%d;%50[^;];%d;%100[^;];%f;\n", &c->id, &(c->nome), c->nif, &(c->morada), c->saldo);
+		listaClientes= InsereCliente(&listaClientes, c);
+	}
+
+	fclose(fp);
+	return listaClientes;
+}
+
+
+
+
+	*/
+
+
+
+
+
+

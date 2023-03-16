@@ -1,7 +1,7 @@
 /*****************************************************************//**
  * \file   StructsRegistos.h
- * \brief  estruturas de armazenamento dos dados dos gestores, clientes e 
- * meios de mobilidade.
+ * \brief  Asssinatura de todas estruturas de armazenamento dos dados 
+ * dos gestores, clientes e meios de mobilidade.
  * 
  * \author julia
  * \date   March 2023
@@ -26,6 +26,7 @@ typedef struct {
 	float autonomia;
 	float custo;
 	char localizacao[40];
+	struct MeioMob* proximo;
 }MeioMob; 
 
 typedef struct {
