@@ -12,9 +12,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-//Funções para criar Clientes, Meios e Gestores e alocar na memória
 /**
- * .
+ * Função que cria o cliente novo e insere na lista.
  * 
  * \param inicio
  * \param id
@@ -24,24 +23,31 @@
  * \param saldo
  * \return 
  */
-Cliente* criarCliente(Cliente * inicio, int id, char nome[], int nif, char morada[], float saldo)
+Cliente* criarCliente(Cliente *inicio, int id, char nome[], int nif, char morada[], float saldo)
 {
 	Cliente * c = (Cliente*) malloc(sizeof(Cliente)); 
-	if (c != NULL) 
-	{
+	if (c == NULL) return NULL;
+		c->proximo = NULL;
+	
 		c->id = id;
 		strcpy(c->nome, nome);
 		c->nif = nif;
 		strcpy(c->morada, morada);
 		c->saldo = saldo;
-		c->proximo = inicio;
+		
+		if (inicio == NULL) {
+			inicio = c;
+		}
+		else {
+			c->proximo = inicio;
+			inicio = c;
+		}
 
 		return c;
+	
 	}
-	else return(inicio);
-}
 /**
- * .
+ * Função que cria novo meio de mobilidade e insere na lista.
  * 
  * \param inicio
  * \param id
@@ -69,7 +75,7 @@ MeioMob* criarMeio(MeioMob * inicio, int id, char tipo[], float carga, float aut
 	else return(inicio); 
 }
 /**
- * .
+ * Função que cria gestor.
  * 
  * \param inicio
  * \param id
@@ -89,32 +95,93 @@ Gestor* criarGestor(Gestor * inicio, int id, char nome[])
 	else return(inicio);
 }
 /**
- * Função para verificar se já existem clientes com o mesmo id.
+ * Função recursiva para guardar clientes da lista em um ficheiro binário.
  * 
  * \param inicio
- * \param id
  * \return 
  */
+void guardarClienteBin(Cliente* inicio, char arquivo[])
+{
+	FILE* fp = fopen("Clientes.bin", "wb"); 
+	if (fp == NULL)
+	{
+		return;
+	}
+
+	Cliente* atual = inicio;
+	while (atual != NULL)
+	{
+		Cliente aux = *atual;
+		aux.proximo = NULL;
+		fwrite(&aux, sizeof(Cliente), 1, fp);
+		//fwrite(&(atual->id),&(atual->nome),&(atual->nif),&(atual->morada),&(atual->saldo), aux, sizeof(Cliente), 1, fp);
+		atual = atual->proximo;
+	}
+
+	fclose(fp);
+
+	}
+/**
+ * Função que recebe a lista de clientes como parâmetro e a salva em ficheiro de texto e binário.
+ * 
+ * \param inicio
+ */
+void listarClientes(Cliente* inicio)
+{
+	FILE* fp = fopen("Clientes.txt", "a");
+	Cliente* aux = inicio;
+
+	if (fp == NULL) {
+		printf("Erro ao abrir arquivo");
+		return;
+	}
+	while (aux != NULL)
+	{
+		fprintf(fp, "%d; %s; %d; %s; %f\n", aux->id, aux->nome, aux->nif, aux->morada, aux->saldo);
+		aux = aux->proximo;
+	}
+	fclose(fp);
+	guardarClienteBin(inicio, "Clientes.bin");
+}
+
+Cliente* removerCliente(Cliente* inicio, int id);
+{
+	Cliente* aux = *inicio;
+	Cliente* noAnterior = NULL;
+
+	if (noAtual == NULL) { return; }
+
+	while (noAtual != NULL && noAtual != id) {
+		noAnterior = noAtual;
+		noAtual = noAtual->proximo;
+	}
+
+	if (noAnterior == NULL) {
+		*listaClientes = noAtual->proximo;
+	}
+
+	else {
+		noAnterior->proximo = noAtual->proximo;
+	}
+
+	free(noAtual);
+}
+
+
+/*
+
 int existeCliente(Cliente* inicio, int id) {
 
 	while (inicio != NULL)
-	{	if (inicio->id == id) return 1;
+	{
+		if (inicio->id == id) return 1;
 		inicio = inicio->proximo;
 	}
 	return(0);
 }
-/**
- * .Função para inserir um novo cliente na lista
- * 
- * \param inicio
- * \param id
- * \param nome
- * \param nif
- * \param morada
- * \param saldo
- * \return 
- */
-Cliente* inserirCliente(Cliente* inicio, int id, char nome, int nif, char morada, float saldo)
+
+/*
+Cliente* inserirCliente(Cliente* inicio, int id, char nome[], int nif, char morada[], float saldo)
 {
 	if (!existeCliente(inicio, id))
 	{
@@ -129,70 +196,13 @@ Cliente* inserirCliente(Cliente* inicio, int id, char nome, int nif, char morada
 
 			return novoCliente;
 		}
-	} else return(inicio);
-
-}
-/**
- * Função para listar na tela os clientes cadastrados.
- * 
- * \param inicio
- */
-void listarClientes(Cliente* inicio)
-{
-	while (inicio != NULL)
-	{
-		printf("%d; %s; %d; %s; %f\n", inicio->id, inicio->nome, inicio->nif, inicio->morada, inicio->saldo);
-		inicio = inicio->proximo;
 	}
+	else return(inicio);
+
 }
-/**
- * Função para guardar clientes no ficheiro de texto.
- * 
- * \param inicio
- * \return 
- */
-int guardarCliente(Cliente* inicio)
-{
-	FILE* fp;
-	fp = fopen("Clientes.txt", "a+");
-	if (fp != NULL)
-	{
-		Cliente* ptr = inicio;
-		while (ptr != NULL)
-		{
-			fprintf(fp, "%d; %s; %d; %s; %f\n", ptr->id, ptr->nome, ptr->nif, ptr->morada, ptr->saldo);
-			ptr = ptr->proximo;
-		}
-		fclose(fp);
-		return(1);
-	}
-	else return(0);
-}
+*/
 
-
-
-
-//Funções para inserir nas listas os novos clientes e meios criados
-
-/*
- * .
- *
- * \param listaClientes
- * \param id
- * \param nome
- * \param nif
- * \param morada
- * \param saldo
- * \return
- */
-
-
-/**
- * .
- * 
- * \param c
- * \return 
- */ /*
+ /*
 Cliente* lerFicheiro(Cliente* c)
 {
 	FILE* fp = fopen("Clientes.txt", "r");
@@ -214,26 +224,4 @@ Cliente* lerFicheiro(Cliente* c)
 }
 */
 
-/*
-Cliente* removerCliente(Cliente* listaClientes, int id);
-{
-	Cliente* noAtual = *listaClientes;
-	Cliente* noAnterior = NULL;
 
-	if (noAtual == NULL) { return; }
-
-	while (noAtual != NULL && noAtual != id) {
-		noAnterior = noAtual;
-		noAtual = noAtual->proximo;
-	}
-
-	if (noAnterior == NULL) {
-		*listaClientes = noAtual->proximo;
-	}
-
-	else {
-		noAnterior->proximo = noAtual->proximo;
-	}
-
-	free(noAtual);
-}*/

@@ -18,6 +18,7 @@ int main(){
 	Gestor* g = NULL;
 	Cliente* ptr = NULL;
 	Cliente* inicio = NULL;
+	Cliente* atual = NULL;
 
 	g = criarGestor(g, 99, "Julia");
 
@@ -25,8 +26,10 @@ int main(){
 	c = criarCliente(c, 4, "Joana", 444444444, "Rua do doce de leite", 500.00);
 	
 	m = criarMeio(m, 79, "trotinete", 55, 55, 2.5, "barcelos");
+	
+	listarClientes(c);
+	
 
-	guardarCliente(ptr);
 
 
 
