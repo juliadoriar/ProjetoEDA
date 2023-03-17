@@ -1,2 +1,0 @@
-1, "Lucas", 111111111, "Rua do brigadeiro", 100.00
-2, "Pedro", 222222222, "Rua do chocolate", 50.00

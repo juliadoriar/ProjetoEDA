@@ -16,7 +16,7 @@ typedef struct {
 	int nif;
 	char morada[100];
 	float saldo; //montante disponível para cada cliente
-	struct Cliente* proximo;
+	struct Cliente* proximo; //ponteiro para o próximo nó da lista
 }Cliente; 
 
 typedef struct {
@@ -26,7 +26,7 @@ typedef struct {
 	float autonomia;
 	float custo;
 	char localizacao[40];
-	struct MeioMob* proximo;
+	struct MeioMob* proximo; //ponteiro para o próximo nó da lista
 }MeioMob; 
 
 typedef struct {
