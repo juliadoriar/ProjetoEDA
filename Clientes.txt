@@ -1,2 +1,0 @@
-1; João; 111111111; Rua do brigadeiro; 200.000000
-2; Carlos; 222222222; Rua do caramelo; 300.000000

@@ -24,21 +24,23 @@ int main(){
 
 	c = criarCliente(c, 3, "Maria", 333333333, "Rua do beijinho", 400.00);
 	c = criarCliente(c, 4, "Joana", 444444444, "Rua do doce de leite", 500.00);
+	c = criarCliente(c, 5, "Luis", 555555555, "Rua do pudim", 150.00);
+
+	m = criarMeio(m, 1, "trotinete", 55, 55, 2.5, "barcelos");
+	m = criarMeio(m, 2, "bicicleta", 44, 44, 3.5, "braga");
+	m = criarMeio(m, 3, "trotinete", 33, 33, 2.5, "barcelos");
 	
-	m = criarMeio(m, 79, "trotinete", 55, 55, 2.5, "barcelos");
 	
-	listarClientes(c);
+	removerMeioMob(m, 3);
 	
-
-
-
-
-
+	listarMeiosMob(m);
+	
 	/*
-	Cliente* listaClientes = NULL;
-	Cliente *c = criarCliente(c, 9, "Carlos", 999999999, "Rua lar doce lar", 500.00);
-	inserirCliente(&listaClientes, c);
-	*/
+	listarClientes(c);
 
-	;
+	removerCliente(c, 4);
+
+	alterarCliente(c, 5, 6, "Luis", 666666666, "Rua do bolo", 335.00);
+	*/
+	
 }

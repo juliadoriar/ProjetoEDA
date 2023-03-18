@@ -57,22 +57,29 @@ Cliente* criarCliente(Cliente *inicio, int id, char nome[], int nif, char morada
  * \param localizacao
  * \return 
  */
-MeioMob* criarMeio(MeioMob * inicio, int id, char tipo[], float carga, float autonomia, float custo, char localizacao[])
+MeioMob* criarMeio(MeioMob *inicio, int id, char tipo[], float carga, float autonomia, float custo, char localizacao[])
 {
-	MeioMob* m = malloc(sizeof(MeioMob));
-	if (m != NULL)
-	{
+	MeioMob * m = (MeioMob*) malloc(sizeof(MeioMob));
+	if (m == NULL) return NULL;
+		m->proximo = NULL;
+	
 		m->id = id;
 		strcpy(m->tipo, tipo);
 		m->carga = carga;
 		m->autonomia = autonomia;
 		m->custo = custo;
 		strcpy(m->localizacao, localizacao);
-		m->proximo = inicio;
+		
+		if (inicio == NULL) {
+			inicio = m;
+		}
+		else {
+			m->proximo = inicio;
+			inicio = m;
+		}
 
 		return m;
-	}
-	else return(inicio); 
+
 }
 /**
  * Função que cria gestor.
@@ -82,7 +89,7 @@ MeioMob* criarMeio(MeioMob * inicio, int id, char tipo[], float carga, float aut
  * \param nome
  * \return 
  */
-Gestor* criarGestor(Gestor * inicio, int id, char nome[])
+Gestor* criarGestor(Gestor *inicio, int id, char nome[])
 {
 	Gestor* g = malloc(sizeof(Gestor));
 	if (g != NULL)
@@ -122,6 +129,32 @@ void guardarClienteBin(Cliente* inicio, char arquivo[])
 
 	}
 /**
+ *  * Função recursiva para guardar os meios de mobilidade da lista em um ficheiro binário.
+ * 
+ * \param inicio
+ * \param arquivo
+ */
+void guardarMeioMobBin(MeioMob* inicio, char arquivo[])
+{
+	FILE* fp = fopen("MeiosMob.bin", "wb");
+	if (fp == NULL)
+	{
+		return;
+	}
+
+	MeioMob* atual = inicio;
+	while (atual != NULL)
+	{
+		MeioMob aux = *atual;
+		aux.proximo = NULL;
+		fwrite(&aux, sizeof(MeioMob), 1, fp);
+		atual = atual->proximo;
+	}
+
+	fclose(fp);
+
+}
+/**
  * Função que recebe a lista de clientes como parâmetro e a salva em ficheiro de texto e binário.
  * 
  * \param inicio
@@ -143,29 +176,143 @@ void listarClientes(Cliente* inicio)
 	fclose(fp);
 	guardarClienteBin(inicio, "Clientes.bin");
 }
+/**
+ * Função que recebe a lista de meios de mobilidade como parâmetro e a salva em ficheiro de texto e binário.
+ *
+ * \param inicio
+ */
 
-Cliente* removerCliente(Cliente* inicio, int id);
+void listarMeiosMob(MeioMob* inicio)
 {
-	Cliente* aux = *inicio;
-	Cliente* noAnterior = NULL;
+	FILE* fp = fopen("MeiosMob.txt", "a");
+	MeioMob* aux = inicio;
 
-	if (noAtual == NULL) { return; }
-
-	while (noAtual != NULL && noAtual != id) {
-		noAnterior = noAtual;
-		noAtual = noAtual->proximo;
+	if (fp == NULL) {
+		printf("Erro ao abrir arquivo");
+		return;
 	}
-
-	if (noAnterior == NULL) {
-		*listaClientes = noAtual->proximo;
+	while (aux != NULL)
+	{
+		fprintf(fp, "%d; %s; %f	; %f; %f; %s\n", aux->id, aux->tipo, aux->carga, aux->autonomia, aux->custo, aux->localizacao);
+		aux = aux->proximo;
 	}
-
-	else {
-		noAnterior->proximo = noAtual->proximo;
-	}
-
-	free(noAtual);
+	fclose(fp);
+	guardarMeioMobBin(inicio, "MeiosMob.bin");
 }
+
+
+/**
+ * Função para remoção de uma struct Cliente da lista através do seu id.
+ * 
+ * \param inicio
+ * \param identificador
+ * \return 
+ */
+Cliente* removerCliente(Cliente* inicio, int identificador)
+{
+	Cliente* atual = inicio;
+	Cliente* anterior = NULL;
+
+	//remover o primeiro nó da lista
+	if (atual != NULL && atual->id == identificador) { 
+		inicio = atual->proximo;
+		free(atual);
+		return (inicio);
+	}
+	//percorrer a lista para navegar todos os nós e remover o que foi passado no parâmetro
+	while (atual != NULL && atual->id != identificador) {
+		anterior = atual;
+		atual = atual->proximo;
+	}
+
+	//no caso do nó não ser encontrado na lista, retorna a lista
+	if (atual == NULL) {
+		return inicio;
+	}
+
+	//sendo encontrado o nó ele é removido, e sua memória liberada
+	else {
+		anterior->proximo = atual->proximo;
+		free(atual);
+	}
+
+	return (inicio);
+}
+/**
+ * Função para remoção de uma struct MeioMob da lista através do seu id.
+ *
+ * \param inicio
+ * \param identificador
+ * \return
+ */
+MeioMob* removerMeioMob(MeioMob* inicio, int identificador)
+{
+	MeioMob* atual = inicio;
+	MeioMob* anterior = NULL;
+
+	//remover o primeiro nó da lista
+	if (atual != NULL && atual->id == identificador) {
+		inicio = atual->proximo;
+		free(atual);
+		return (inicio);
+	}
+	//percorrer a lista para navegar todos os nós e remover o que foi passado no parâmetro
+	while (atual != NULL && atual->id != identificador) {
+		anterior = atual;
+		atual = atual->proximo;
+	}
+		//no caso do nó não ser encontrado na lista, retorna a lista
+	if (atual == NULL) {
+		return inicio;
+	}
+		//sendo encontrado o nó ele é removido, e sua memória liberada
+	else {
+		anterior->proximo = atual->proximo;
+		free(atual);
+	}
+	return (inicio);
+}
+/**
+ * Função recursiva para buscar um nó na lista de clientes.
+ * 
+ * \param inicio
+ * \param identificador
+ * \return 
+ */
+Cliente* buscarCliente(Cliente* inicio, int identificador) {
+	Cliente* atual = inicio;
+
+	while (atual != NULL) {
+		if (atual->id == identificador) {
+			return atual;
+		}
+		atual = atual->proximo;		
+	}
+	return NULL;
+}
+/**
+ * função que altera os dados da struct Cliente dentro da lista.
+ * 
+ * \param inicio
+ * \param identificador
+ * \param novoid
+ * \param novonome
+ * \param novonif
+ * \param novamorada
+ * \param novosaldo
+ */
+void alterarCliente(Cliente* inicio, int identificador, int novoid, char novonome[], int novonif, char novamorada[], float novosaldo) {
+ 
+		Cliente* cliente = buscarCliente(inicio, identificador);
+		if (cliente != NULL) {
+			cliente->id = novoid;
+			strcpy(cliente->nome, novonome);
+			cliente->nif = novonif;
+			strcpy(cliente->morada, novamorada);
+			cliente->saldo = novosaldo;
+
+		}
+	}
 
 
 /*

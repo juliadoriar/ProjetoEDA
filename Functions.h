@@ -27,10 +27,26 @@ Gestor* criarGestor(Gestor* inicio, int id, char nome[]);
 //Função recursiva para salvar lista de clientes em ficheiro binário
 void guardarClienteBin(Cliente* c, char arquivo[]);
 
+//Função recursiva para salvar lista de meios de mobilidade em ficheiro binário
+void guardarMeioMobBin(MeioMob* m, char arquivo[]);
+
 //Função para listar clientes ao final de um ficheiro de texto
 void listarClientes(Cliente* inicio);
 
+//Função para listar meios de mobilidade ao final de um ficheiro de texto
+void listarMeiosMob(MeioMob* inicio);
+
+//função para remover um nó da lista de clientes
 Cliente* removerCliente(Cliente* inicio, int id);
+
+//função para remover um nó da lista de clientes
+MeioMob* removerMeioMob(MeioMob* inicio, int id);
+
+//função recursiva que encontra um nó na lista através do id
+Cliente* buscarCliente(Cliente* inicio, int identificador);
+
+//função para alterar dados de uma struct dentro de uma lista
+void alterarCliente(Cliente* inicio, int identificador, int novoid, char novonome[], int novonif, char novamorada[], float novosaldo);
 
 /*
 
