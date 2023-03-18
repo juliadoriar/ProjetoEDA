@@ -33,3 +33,12 @@ typedef struct {
 	int id;
 	char nome[50];
 }Gestor;
+
+typedef struct {
+	int id; //identificacao do aluguer
+	int idMeio; //identificacao do meio alugado
+	int idCliente; //identificacao do locatário
+	//char nome [50]; //nome do locatário
+	float custo; //custo do aluguer
+	struct Aluguer* proximo; //ponteiro para o próximo nó da lista
+}Aluguer;

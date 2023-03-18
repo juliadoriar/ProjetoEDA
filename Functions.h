@@ -13,8 +13,8 @@
 
 #pragma once
 
-/*bool existeCliente(Cliente* clientes[], int aux, int n);*/
 
+ 
 //Função para criar novo cliente
 Cliente* criarCliente(Cliente *inicio, int id, char nome[], int nif, char morada[], float saldo);
 
@@ -33,7 +33,7 @@ void guardarMeioMobBin(MeioMob* m, char arquivo[]);
 //Função para listar clientes ao final de um ficheiro de texto
 void listarClientes(Cliente* inicio);
 
-//Função para listar meios de mobilidade ao final de um ficheiro de texto
+//Função para listar meios de mobilidade em um ficheiro de texto
 void listarMeiosMob(MeioMob* inicio);
 
 //função para remover um nó da lista de clientes
@@ -47,6 +47,24 @@ Cliente* buscarCliente(Cliente* inicio, int identificador);
 
 //função para alterar dados de uma struct dentro de uma lista
 void alterarCliente(Cliente* inicio, int identificador, int novoid, char novonome[], int novonif, char novamorada[], float novosaldo);
+
+//função recursiva que encontra um nó na lista através do id
+MeioMob* buscarMeioMob(MeioMob* inicio, int identificador);
+
+//função para alterar dados de uma struct dentro de uma lista
+void alterarMeioMob(MeioMob* inicio, int identificador, int id, char tipo[], float carga, float autonomia, float custo, char localizacao[]);
+
+//função para ordenar 
+void ordenarMeioMob(MeioMob* inicio);
+
+//Função para criar novo aluguer
+Aluguer* criarAluguer(Cliente* inicioC, Aluguer* inicioA, int id, int idMeio, int idCliente, float custo);
+
+//Função que guarda os aluguéis em um arquivo binário
+void guardarAluguerBin(Aluguer* inicio, char arquivo[]); 
+
+//Função para listar meios de mobilidade em um ficheiro de texto
+void listarAlugueres(Aluguer* inicio);
 
 /*
 
@@ -70,3 +88,4 @@ void removerCliente(Cliente** listaClientes, Cliente* id);
 int inserirMeio();
 int removeCliente();
 int removeMeio();*/
+/*bool existeCliente(Cliente* clientes[], int aux, int n);*/

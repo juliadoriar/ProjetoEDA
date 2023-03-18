@@ -1,0 +1,18 @@
+9; trotinete; 99.000000	; 99.000000; 3.500000; Viana do Castelo
+2; bicicleta; 44.000000	; 55.000000; 3.500000; braga
+1; trotinete; 55.000000	; 44.000000; 2.500000; barcelos
+9; trotinete; 99.000000	; 99.000000; 3.500000; Viana do Castelo
+2; bicicleta; 44.000000	; 55.000000; 3.500000; braga
+1; trotinete; 55.000000	; 44.000000; 2.500000; barcelos
+9; trotinete; 99.000000	; 99.000000; 3.500000; Viana do Castelo
+2; bicicleta; 44.000000	; 55.000000; 3.500000; braga
+1; trotinete; 55.000000	; 44.000000; 2.500000; barcelos
+9; trotinete; 99.000000	; 99.000000; 3.500000; Viana do Castelo
+2; bicicleta; 44.000000	; 55.000000; 3.500000; braga
+1; trotinete; 55.000000	; 44.000000; 2.500000; barcelos
+9; trotinete; 99.000000	; 99.000000; 3.500000; Viana do Castelo
+2; bicicleta; 44.000000	; 55.000000; 3.500000; braga
+1; trotinete; 55.000000	; 44.000000; 2.500000; barcelos
+9; trotinete; 99.000000	; 99.000000; 3.500000; Viana do Castelo
+2; bicicleta; 44.000000	; 55.000000; 3.500000; braga
+1; trotinete; 55.000000	; 44.000000; 2.500000; barcelos
