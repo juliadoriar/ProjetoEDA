@@ -1,12 +1,1 @@
-6; Luis; 666666666; Rua do bolo; 335.000000
-3; Maria; 333333333; Rua do beijinho; 400.000000
-6; Luis; 666666666; Rua do bolo; 335.000000
-3; Maria; 333333333; Rua do beijinho; 400.000000
-6; Luis; 666666666; Rua do bolo; 335.000000
-3; Maria; 333333333; Rua do beijinho; 400.000000
-6; Luis; 666666666; Rua do bolo; 335.000000
-3; Maria; 333333333; Rua do beijinho; 400.000000
-6; Luis; 666666666; Rua do bolo; 335.000000
-3; Maria; 333333333; Rua do beijinho; 400.000000
-6; Luis; 666666666; Rua do bolo; 335.000000
-3; Maria; 333333333; Rua do beijinho; 400.000000
+1;Pedro;111111111;Rua da amora;65.000000

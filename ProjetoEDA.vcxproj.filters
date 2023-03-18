@@ -32,8 +32,5 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Clientes.txt" />
-    <Text Include="MeiosMob.txt">
-      <Filter>Arquivos de Recurso</Filter>
-    </Text>
   </ItemGroup>
 </Project>

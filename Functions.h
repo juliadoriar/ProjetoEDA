@@ -66,6 +66,14 @@ void guardarAluguerBin(Aluguer* inicio, char arquivo[]);
 //Função para listar meios de mobilidade em um ficheiro de texto
 void listarAlugueres(Aluguer* inicio);
 
+//função que lê um ficheiro de texto e insere os dados em uma lista
+Cliente* lerFicheiroCliente(Cliente* inicio);
+
+
+/*
+void inserirCliente(Cliente* inicio, int id, char nome[], int nif, char morada[], float saldo);
+*/
+
 /*
 
 //Função auxiliar para verificar existência de um cliente a partir do seu id
